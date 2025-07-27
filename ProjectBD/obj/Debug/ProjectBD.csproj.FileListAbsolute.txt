@@ -1,0 +1,5 @@
+C:\Users\Asus\Downloads\guia3\ProjectBD\ProjectBD\obj\Debug\ProjectBD.csproj.AssemblyReference.cache
+C:\Users\Asus\Downloads\guia3\ProjectBD\ProjectBD\obj\Debug\ProjectBD.Properties.Resources.resources
+C:\Users\Asus\Downloads\guia3\ProjectBD\ProjectBD\obj\Debug\ProjectBD.csproj.GenerateResource.cache
+C:\Users\Asus\Downloads\guia3\ProjectBD\ProjectBD\obj\Debug\ProjectBD.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Downloads\guia3\ProjectBD\ProjectBD\obj\Debug\ProjectBD.Form1.resources
