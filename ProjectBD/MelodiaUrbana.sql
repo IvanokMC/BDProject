@@ -187,7 +187,6 @@ INSERT INTO Album VALUES
 ('P00004', '2020-09-10', 'A00005', 0);
 
 
-
 INSERT INTO Cancion VALUES
 ('P00003', '00:03:45', 'MP3', 'Indie', 1, NULL, 'A00003'),
 ('P00005', '00:04:15', 'MP3', 'Reggaeton', 0, 'P00002', 'A00004'),
@@ -538,3 +537,297 @@ BEGIN
     JOIN @AffectedAlbumIds aff ON A.id_producto = aff.id_album;
 END;
 GO
+
+-- Obtener Clientes
+CREATE PROCEDURE GetClientes
+AS
+BEGIN
+    SELECT id_cliente, nombre, correo_electronico, direccion
+    FROM Cliente;
+END;
+GO
+
+-- Actualizar Cliente
+CREATE PROCEDURE UpdateCliente
+    @id_cliente INT,
+    @nombre TNombreCorto,
+    @correo_electronico TCorreo,
+    @contraseña TPassword,
+    @direccion TDescripcion
+AS
+BEGIN
+    UPDATE Cliente
+    SET
+        nombre = @nombre,
+        correo_electronico = @correo_electronico,
+        contraseña = @contraseña,
+        direccion = @direccion
+    WHERE id_cliente = @id_cliente;
+END;
+GO
+
+-- Eliminar Cliente
+CREATE PROCEDURE DeleteCliente
+    @id_cliente INT
+AS
+BEGIN
+    DELETE FROM Cliente
+    WHERE id_cliente = @id_cliente;
+END;
+GO
+
+CREATE PROCEDURE DeleteComprobantesByCliente
+@id_cliente INT
+AS
+BEGIN
+-- Eliminar los detalles de venta asociados a los comprobantes de este cliente
+DELETE FROM DetalleVenta
+WHERE id_comprobante IN (SELECT id_comprobante FROM ComprobanteVenta WHERE id_cliente = @id_cliente);
+
+-- Luego, eliminar los comprobantes de venta de este cliente
+DELETE FROM ComprobanteVenta
+WHERE id_cliente = @id_cliente;
+END;
+
+
+IF OBJECT_ID('InsertAlbum', 'P') IS NOT NULL
+    DROP PROCEDURE InsertAlbum;
+GO
+
+CREATE PROCEDURE InsertAlbum
+    @id_producto VARCHAR(6),
+    @titulo NVARCHAR(200),
+    @precio_unitario DECIMAL(10,2),
+    @fecha_lanzamiento DATE,
+    @id_artista_principal VARCHAR(6)
+AS
+BEGIN
+    EXEC InsertProducto @id_producto, @titulo, @precio_unitario;
+    INSERT INTO Album (id_producto, fecha_lanzamiento, id_artista_principal)
+    VALUES (@id_producto, @fecha_lanzamiento, @id_artista_principal);
+END;
+GO
+
+CREATE PROCEDURE UpdateAlbum
+    @id_album VARCHAR(6),
+    @titulo NVARCHAR(200),
+    @precio_unitario DECIMAL(10,2),
+    @fecha_lanzamiento DATE,
+    @id_artista_principal VARCHAR(6)
+AS
+BEGIN
+    UPDATE Producto
+    SET titulo = @titulo,
+        precio_unitario = @precio_unitario
+    WHERE id_producto = @id_album;
+
+    UPDATE Album
+    SET fecha_lanzamiento = @fecha_lanzamiento,
+        id_artista_principal = @id_artista_principal
+    WHERE id_producto = @id_album;
+END;
+GO
+
+
+CREATE PROCEDURE DeleteCancionesByAlbum
+    @id_album VARCHAR(6)
+AS
+BEGIN
+    DELETE FROM Cancion
+    WHERE id_album = @id_album;
+END;
+GO
+
+CREATE PROCEDURE DeleteAlbum
+    @id_album VARCHAR(6)
+AS
+BEGIN
+    -- Primero, eliminar las canciones asociadas a este álbum
+    EXEC DeleteCancionesByAlbum @id_album;
+
+    -- Luego, eliminar el álbum de la tabla Album
+    DELETE FROM Album
+    WHERE id_producto = @id_album;
+
+    -- Finalmente, eliminar el producto asociado al álbum
+    DELETE FROM Producto
+    WHERE id_producto = @id_album;
+END;
+GO
+
+CREATE PROCEDURE DeleteComprobantesByCliente
+    @id_cliente INT
+AS
+BEGIN
+    -- Eliminar los detalles de venta asociados a los comprobantes de este cliente
+    DELETE FROM DetalleVenta
+    WHERE id_comprobante IN (
+        SELECT id_comprobante FROM ComprobanteVenta WHERE id_cliente = @id_cliente
+    );
+
+    -- Luego, eliminar los comprobantes de venta de este cliente
+    DELETE FROM ComprobanteVenta
+    WHERE id_cliente = @id_cliente;
+END;
+GO
+
+
+CREATE PROCEDURE InsertProducto
+    @id_producto VARCHAR(6),
+    @titulo NVARCHAR(200),
+    @precio_unitario DECIMAL(10,2)
+AS
+BEGIN
+    INSERT INTO Producto (id_producto, titulo, precio_unitario)
+    VALUES (@id_producto, @titulo, @precio_unitario);
+END;
+GO
+
+CREATE PROCEDURE InsertArtistaSolista
+    @id_artista VARCHAR(6),
+    @nombre_artistico NVARCHAR(100),
+    @pais_origen NVARCHAR(100),
+    @genero_principal NVARCHAR(100),
+    @fecha_inicio DATE,
+    @biografia NVARCHAR(1000),
+    @imagen NVARCHAR(1000),
+    @nombre_real NVARCHAR(100),
+    @fecha_nacimiento DATE,
+    @sexo NVARCHAR(10)
+AS
+BEGIN
+    INSERT INTO Artista (id_artista, nombre_artistico, tipo_artista, pais_origen, genero_principal, fecha_inicio, biografia, imagen)
+    VALUES (@id_artista, @nombre_artistico, 'solista', @pais_origen, @genero_principal, @fecha_inicio, @biografia, @imagen);
+
+    INSERT INTO ArtistaSolista (id_artista, nombre_real, fecha_nacimiento, sexo)
+    VALUES (@id_artista, @nombre_real, @fecha_nacimiento, @sexo);
+END;
+GO
+
+
+CREATE PROCEDURE InsertGrupoMusical
+    @id_artista VARCHAR(6),
+    @nombre_artistico NVARCHAR(100),
+    @pais_origen NVARCHAR(100),
+    @genero_principal NVARCHAR(100),
+    @fecha_inicio DATE,
+    @biografia NVARCHAR(1000),
+    @imagen NVARCHAR(1000),
+    @fecha_formacion DATE,
+    @fecha_disolucion DATE = NULL
+AS
+BEGIN
+    INSERT INTO Artista (id_artista, nombre_artistico, tipo_artista, pais_origen, genero_principal, fecha_inicio, biografia, imagen)
+    VALUES (@id_artista, @nombre_artistico, 'grupo', @pais_origen, @genero_principal, @fecha_inicio, @biografia, @imagen);
+
+    INSERT INTO GrupoMusical (id_artista, fecha_formacion, fecha_disolucion)
+    VALUES (@id_artista, @fecha_formacion, @fecha_disolucion);
+END;
+GO
+
+
+CREATE PROCEDURE UpdateArtistaSolista
+    @id_artista VARCHAR(6),
+    @nombre_artistico NVARCHAR(100),
+    @pais_origen NVARCHAR(100),
+    @genero_principal NVARCHAR(100),
+    @fecha_inicio DATE,
+    @biografia NVARCHAR(1000),
+    @imagen NVARCHAR(1000),
+    @nombre_real NVARCHAR(100),
+    @fecha_nacimiento DATE,
+    @sexo NVARCHAR(10)
+AS
+BEGIN
+    UPDATE Artista
+    SET nombre_artistico = @nombre_artistico,
+        pais_origen = @pais_origen,
+        genero_principal = @genero_principal,
+        fecha_inicio = @fecha_inicio,
+        biografia = @biografia,
+        imagen = @imagen
+    WHERE id_artista = @id_artista;
+
+    UPDATE ArtistaSolista
+    SET nombre_real = @nombre_real,
+        fecha_nacimiento = @fecha_nacimiento,
+        sexo = @sexo
+    WHERE id_artista = @id_artista;
+END;
+GO
+
+
+CREATE PROCEDURE UpdateGrupoMusical
+    @id_artista VARCHAR(6),
+    @nombre_artistico NVARCHAR(100),
+    @pais_origen NVARCHAR(100),
+    @genero_principal NVARCHAR(100),
+    @fecha_inicio DATE,
+    @biografia NVARCHAR(1000),
+    @imagen NVARCHAR(1000),
+    @fecha_formacion DATE,
+    @fecha_disolucion DATE = NULL
+AS
+BEGIN
+    UPDATE Artista
+    SET nombre_artistico = @nombre_artistico,
+        pais_origen = @pais_origen,
+        genero_principal = @genero_principal,
+        fecha_inicio = @fecha_inicio,
+        biografia = @biografia,
+        imagen = @imagen
+    WHERE id_artista = @id_artista;
+
+    UPDATE GrupoMusical
+    SET fecha_formacion = @fecha_formacion,
+        fecha_disolucion = @fecha_disolucion
+    WHERE id_artista = @id_artista;
+END;
+GO
+
+CREATE PROCEDURE DeleteCancionesByArtista
+    @id_artista VARCHAR(6)
+AS
+BEGIN
+    DELETE FROM Cancion
+    WHERE id_artista_principal = @id_artista;
+END;
+GO
+
+
+CREATE PROCEDURE DeleteAlbumsByArtista
+    @id_artista VARCHAR(6)
+AS
+BEGIN
+    -- Primero, eliminar las canciones de los álbumes de este artista
+    DELETE FROM Cancion
+    WHERE id_album IN (SELECT id_producto FROM Album WHERE id_artista_principal = @id_artista);
+
+    -- Luego, eliminar los álbumes de este artista
+    DELETE FROM Album
+    WHERE id_artista_principal = @id_artista;
+END;
+GO
+
+CREATE PROCEDURE DeleteArtista
+    @id_artista VARCHAR(6)
+AS
+BEGIN
+    -- Eliminar canciones y álbumes asociados
+    EXEC DeleteCancionesByArtista @id_artista;
+    EXEC DeleteAlbumsByArtista @id_artista;
+
+    -- Eliminar de tablas de subtipo
+    DELETE FROM ArtistaSolista WHERE id_artista = @id_artista;
+    DELETE FROM GrupoMusical WHERE id_artista = @id_artista;
+    DELETE FROM IntegranteGrupo WHERE id_artista_grupo = @id_artista OR id_artista_miembro = @id_artista;
+
+    -- Finalmente, eliminar de la tabla principal Artista
+    DELETE FROM Artista
+    WHERE id_artista = @id_artista;
+END;
+GO
+
+
+
+

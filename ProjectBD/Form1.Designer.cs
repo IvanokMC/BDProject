@@ -40,8 +40,10 @@ namespace ProjectBD
             this.btnGestionarMusica.Name = "btnGestionarMusica";
             this.btnGestionarMusica.Size = new System.Drawing.Size(200, 60);
             this.btnGestionarMusica.TabIndex = 0;
-            this.btnGestionarMusica.Text = "Gestionar Música";
-            this.btnGestionarMusica.UseVisualStyleBackColor = true;
+            this.btnGestionarMusica.Text = "Música";
+            this.btnGestionarMusica.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnGestionarMusica.ForeColor = System.Drawing.Color.White;
+            this.btnGestionarMusica.UseVisualStyleBackColor = false;
             this.btnGestionarMusica.Click += new System.EventHandler(this.btnGestionarMusica_Click);
             // 
             // btnGestionarVentas
@@ -51,8 +53,10 @@ namespace ProjectBD
             this.btnGestionarVentas.Name = "btnGestionarVentas";
             this.btnGestionarVentas.Size = new System.Drawing.Size(200, 60);
             this.btnGestionarVentas.TabIndex = 1;
-            this.btnGestionarVentas.Text = "Gestionar Ventas";
-            this.btnGestionarVentas.UseVisualStyleBackColor = true;
+            this.btnGestionarVentas.Text = "Ventas";
+            this.btnGestionarVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnGestionarVentas.ForeColor = System.Drawing.Color.White;
+            this.btnGestionarVentas.UseVisualStyleBackColor = false;
             this.btnGestionarVentas.Click += new System.EventHandler(this.btnGestionarVentas_Click);
             // 
             // btnGestionarClientes
@@ -62,8 +66,10 @@ namespace ProjectBD
             this.btnGestionarClientes.Name = "btnGestionarClientes";
             this.btnGestionarClientes.Size = new System.Drawing.Size(200, 60);
             this.btnGestionarClientes.TabIndex = 2;
-            this.btnGestionarClientes.Text = "Gestionar Clientes";
-            this.btnGestionarClientes.UseVisualStyleBackColor = true;
+            this.btnGestionarClientes.Text = "Clientes";
+            this.btnGestionarClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnGestionarClientes.ForeColor = System.Drawing.Color.White;
+            this.btnGestionarClientes.UseVisualStyleBackColor = false;
             this.btnGestionarClientes.Click += new System.EventHandler(this.btnGestionarClientes_Click);
             // 
             // Form1
@@ -76,7 +82,9 @@ namespace ProjectBD
             this.Controls.Add(this.btnGestionarMusica);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Melodia Urbana - Menú Principal";
+            this.Text = "Melodia Urbana";
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.ForeColor = System.Drawing.Color.White;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

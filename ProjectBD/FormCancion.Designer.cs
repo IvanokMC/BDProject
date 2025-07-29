@@ -54,6 +54,7 @@ namespace ProjectBD
             this.lblTitulo.Size = new System.Drawing.Size(43, 16);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "Título:";
+            this.lblTitulo.ForeColor = System.Drawing.Color.White;
             // 
             // txtTitulo
             // 
@@ -61,6 +62,8 @@ namespace ProjectBD
             this.txtTitulo.Name = "txtTitulo";
             this.txtTitulo.Size = new System.Drawing.Size(250, 22);
             this.txtTitulo.TabIndex = 1;
+            this.txtTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtTitulo.ForeColor = System.Drawing.Color.White;
             // 
             // lblPrecio
             // 
@@ -70,6 +73,7 @@ namespace ProjectBD
             this.lblPrecio.Size = new System.Drawing.Size(49, 16);
             this.lblPrecio.TabIndex = 2;
             this.lblPrecio.Text = "Precio:";
+            this.lblPrecio.ForeColor = System.Drawing.Color.White;
             // 
             // txtPrecio
             // 
@@ -77,6 +81,8 @@ namespace ProjectBD
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(100, 22);
             this.txtPrecio.TabIndex = 3;
+            this.txtPrecio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtPrecio.ForeColor = System.Drawing.Color.White;
             // 
             // lblDuracion
             // 
@@ -86,6 +92,7 @@ namespace ProjectBD
             this.lblDuracion.Size = new System.Drawing.Size(64, 16);
             this.lblDuracion.TabIndex = 4;
             this.lblDuracion.Text = "Duración:";
+            this.lblDuracion.ForeColor = System.Drawing.Color.White;
             // 
             // txtDuracion
             // 
@@ -94,6 +101,8 @@ namespace ProjectBD
             this.txtDuracion.Size = new System.Drawing.Size(100, 22);
             this.txtDuracion.TabIndex = 5;
             this.txtDuracion.Text = "HH:MM:SS";
+            this.txtDuracion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtDuracion.ForeColor = System.Drawing.Color.White;
             // 
             // lblFormato
             // 
@@ -103,6 +112,7 @@ namespace ProjectBD
             this.lblFormato.Size = new System.Drawing.Size(60, 16);
             this.lblFormato.TabIndex = 6;
             this.lblFormato.Text = "Formato:";
+            this.lblFormato.ForeColor = System.Drawing.Color.White;
             // 
             // cmbFormato
             // 
@@ -113,6 +123,8 @@ namespace ProjectBD
             this.cmbFormato.Name = "cmbFormato";
             this.cmbFormato.Size = new System.Drawing.Size(121, 24);
             this.cmbFormato.TabIndex = 7;
+            this.cmbFormato.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.cmbFormato.ForeColor = System.Drawing.Color.White;
             // 
             // lblGenero
             // 
@@ -122,6 +134,7 @@ namespace ProjectBD
             this.lblGenero.Size = new System.Drawing.Size(57, 16);
             this.lblGenero.TabIndex = 8;
             this.lblGenero.Text = "Género:";
+            this.lblGenero.ForeColor = System.Drawing.Color.White;
             // 
             // txtGenero
             // 
@@ -129,6 +142,8 @@ namespace ProjectBD
             this.txtGenero.Name = "txtGenero";
             this.txtGenero.Size = new System.Drawing.Size(250, 22);
             this.txtGenero.TabIndex = 9;
+            this.txtGenero.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtGenero.ForeColor = System.Drawing.Color.White;
             // 
             // chkEsSencillo
             // 
@@ -139,7 +154,7 @@ namespace ProjectBD
             this.chkEsSencillo.TabIndex = 10;
             this.chkEsSencillo.Text = "Es Sencillo";
             this.chkEsSencillo.UseVisualStyleBackColor = true;
-            this.chkEsSencillo.CheckedChanged += new System.EventHandler(this.chkEsSencillo_CheckedChanged);
+            this.chkEsSencillo.ForeColor = System.Drawing.Color.White;
             // 
             // lblAlbum
             // 
@@ -149,6 +164,7 @@ namespace ProjectBD
             this.lblAlbum.Size = new System.Drawing.Size(48, 16);
             this.lblAlbum.TabIndex = 11;
             this.lblAlbum.Text = "Álbum:";
+            this.lblAlbum.ForeColor = System.Drawing.Color.White;
             // 
             // cmbAlbum
             // 
@@ -158,6 +174,8 @@ namespace ProjectBD
             this.cmbAlbum.Name = "cmbAlbum";
             this.cmbAlbum.Size = new System.Drawing.Size(250, 24);
             this.cmbAlbum.TabIndex = 12;
+            this.cmbAlbum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.cmbAlbum.ForeColor = System.Drawing.Color.White;
             // 
             // lblArtistaPrincipal
             // 
@@ -167,10 +185,13 @@ namespace ProjectBD
             this.lblArtistaPrincipal.Size = new System.Drawing.Size(106, 16);
             this.lblArtistaPrincipal.TabIndex = 13;
             this.lblArtistaPrincipal.Text = "Artista Principal:";
+            this.lblArtistaPrincipal.ForeColor = System.Drawing.Color.White;
             // 
             // cmbArtistaPrincipal
             // 
             this.cmbArtistaPrincipal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbArtistaPrincipal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.cmbArtistaPrincipal.ForeColor = System.Drawing.Color.White;
             this.cmbArtistaPrincipal.FormattingEnabled = true;
             this.cmbArtistaPrincipal.Location = new System.Drawing.Point(150, 307);
             this.cmbArtistaPrincipal.Name = "cmbArtistaPrincipal";
@@ -185,6 +206,8 @@ namespace ProjectBD
             this.btnGuardarCancion.TabIndex = 15;
             this.btnGuardarCancion.Text = "Guardar";
             this.btnGuardarCancion.UseVisualStyleBackColor = true;
+            this.btnGuardarCancion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnGuardarCancion.ForeColor = System.Drawing.Color.White;
             this.btnGuardarCancion.Click += new System.EventHandler(this.btnGuardarCancion_Click);
             // 
             // FormCancion
@@ -209,7 +232,8 @@ namespace ProjectBD
             this.Controls.Add(this.txtTitulo);
             this.Controls.Add(this.lblTitulo);
             this.Name = "FormCancion";
-            this.Text = "Agregar Canción";
+            this.Text = "Canción";
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.Load += new System.EventHandler(this.FormCancion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

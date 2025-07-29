@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient; // Required for SQL operations
+using ProjectBD;
 
 namespace ProjectBD
 {
@@ -233,6 +234,12 @@ namespace ProjectBD
 
                     transaction.Commit();
                     MessageBox.Show("Venta procesada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Generar y mostrar comprobante
+                    string comprobante = GenerateComprobanteText(idCliente, ventaId);
+                    FormComprobante formComprobante = new FormComprobante(comprobante);
+                    formComprobante.ShowDialog();
+
                     ClearSale();
                 }
                 catch (SqlException ex)
@@ -246,6 +253,45 @@ namespace ProjectBD
                     MessageBox.Show("Ocurrió un error inesperado al procesar la venta: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private string GenerateComprobanteText(int idCliente, int ventaId)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("----------------------------------------");
+            sb.AppendLine("          COMPROBANTE DE VENTA          ");
+            sb.AppendLine("----------------------------------------");
+            sb.AppendLine($"Fecha: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}");
+            sb.AppendLine($"Comprobante ID: {ventaId}");
+
+            // Obtener nombre del cliente
+            string clientName = "";
+            DataRowView selectedClient = cmbClientes.SelectedItem as DataRowView;
+            if (selectedClient != null)
+            {
+                clientName = selectedClient["nombre"].ToString();
+            }
+            sb.AppendLine($"Cliente: {clientName}");
+            sb.AppendLine("----------------------------------------");
+            sb.AppendLine("Productos:");
+            sb.AppendLine("----------------------------------------");
+
+            foreach (DataRow row in cartDataTable.Rows)
+            {
+                string productName = row.Field<string>("Nombre");
+                int quantity = row.Field<int>("Cantidad");
+                decimal unitPrice = row.Field<decimal>("Precio Unitario");
+                decimal subtotal = row.Field<decimal>("Subtotal");
+                sb.AppendLine($"- {productName} (x{quantity}) @ {unitPrice:C} = {subtotal:C}");
+            }
+
+            sb.AppendLine("----------------------------------------");
+            sb.AppendLine($"Total: {lblTotal.Text.Replace("Total: ", "")}");
+            sb.AppendLine("----------------------------------------");
+            sb.AppendLine("¡Gracias por su compra!");
+            sb.AppendLine("----------------------------------------");
+
+            return sb.ToString();
         }
 
         private void BtnClearSale_Click(object sender, EventArgs e)

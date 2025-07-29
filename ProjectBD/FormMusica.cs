@@ -63,5 +63,17 @@ namespace ProjectBD
                 btnSearchCanciones_Click(null, null); 
             }
         }
+
+        private void btnGestionarAlbums_Click(object sender, EventArgs e)
+        {
+            FormAlbum formAlbum = new FormAlbum();
+            formAlbum.ShowDialog();
+        }
+
+        private void btnGestionarArtistas_Click(object sender, EventArgs e)
+        {
+            FormArtista formArtista = new FormArtista();
+            formArtista.ShowDialog();
+        }
     }
 }

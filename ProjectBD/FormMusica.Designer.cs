@@ -46,6 +46,7 @@ namespace ProjectBD
             this.lblSearch.Size = new System.Drawing.Size(120, 16);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Término de búsqueda:";
+            this.lblSearch.ForeColor = System.Drawing.Color.White;
             // 
             // txtSearchTerm
             // 
@@ -53,6 +54,8 @@ namespace ProjectBD
             this.txtSearchTerm.Name = "txtSearchTerm";
             this.txtSearchTerm.Size = new System.Drawing.Size(300, 22);
             this.txtSearchTerm.TabIndex = 1;
+            this.txtSearchTerm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtSearchTerm.ForeColor = System.Drawing.Color.White;
             // 
             // btnSearchArtistas
             // 
@@ -62,6 +65,8 @@ namespace ProjectBD
             this.btnSearchArtistas.TabIndex = 2;
             this.btnSearchArtistas.Text = "Buscar Artistas por Nombre";
             this.btnSearchArtistas.UseVisualStyleBackColor = true;
+            this.btnSearchArtistas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnSearchArtistas.ForeColor = System.Drawing.Color.White;
             this.btnSearchArtistas.Click += new System.EventHandler(this.btnSearchArtistas_Click);
             // 
             // btnSearchCanciones
@@ -72,6 +77,8 @@ namespace ProjectBD
             this.btnSearchCanciones.TabIndex = 3;
             this.btnSearchCanciones.Text = "Buscar Canciones (Título/Género)";
             this.btnSearchCanciones.UseVisualStyleBackColor = true;
+            this.btnSearchCanciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnSearchCanciones.ForeColor = System.Drawing.Color.White;
             this.btnSearchCanciones.Click += new System.EventHandler(this.btnSearchCanciones_Click);
             // 
             // btnSearchAlbums
@@ -82,11 +89,17 @@ namespace ProjectBD
             this.btnSearchAlbums.TabIndex = 4;
             this.btnSearchAlbums.Text = "Buscar Álbumes (Título/Artista)";
             this.btnSearchAlbums.UseVisualStyleBackColor = true;
+            this.btnSearchAlbums.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnSearchAlbums.ForeColor = System.Drawing.Color.White;
             this.btnSearchAlbums.Click += new System.EventHandler(this.btnSearchAlbums_Click);
             // 
             // dgvResultados
             // 
-            this.dgvResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResultados.BackgroundColor = System.Drawing.Color.White;
+            this.dgvResultados.ForeColor = System.Drawing.Color.Black;
+            this.dgvResultados.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
+            this.dgvResultados.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.dgvResultados.EnableHeadersVisualStyles = false;
             this.dgvResultados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -104,13 +117,43 @@ namespace ProjectBD
             this.btnAgregarCancion.TabIndex = 6;
             this.btnAgregarCancion.Text = "Agregar Canción";
             this.btnAgregarCancion.UseVisualStyleBackColor = true;
+            this.btnAgregarCancion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnAgregarCancion.ForeColor = System.Drawing.Color.White;
             this.btnAgregarCancion.Click += new System.EventHandler(this.btnAgregarCancion_Click);
+            // 
+            // btnGestionarAlbums
+            // 
+            this.btnGestionarAlbums = new System.Windows.Forms.Button();
+            this.btnGestionarAlbums.Location = new System.Drawing.Point(719, 50);
+            this.btnGestionarAlbums.Name = "btnGestionarAlbums";
+            this.btnGestionarAlbums.Size = new System.Drawing.Size(150, 30);
+            this.btnGestionarAlbums.TabIndex = 7;
+            this.btnGestionarAlbums.Text = "Gestionar Álbumes";
+            this.btnGestionarAlbums.UseVisualStyleBackColor = true;
+            this.btnGestionarAlbums.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnGestionarAlbums.ForeColor = System.Drawing.Color.White;
+            this.btnGestionarAlbums.Click += new System.EventHandler(this.btnGestionarAlbums_Click);
+            // 
+            // btnGestionarArtistas
+            // 
+            this.btnGestionarArtistas = new System.Windows.Forms.Button();
+            this.btnGestionarArtistas.Location = new System.Drawing.Point(875, 50);
+            this.btnGestionarArtistas.Name = "btnGestionarArtistas";
+            this.btnGestionarArtistas.Size = new System.Drawing.Size(150, 30);
+            this.btnGestionarArtistas.TabIndex = 8;
+            this.btnGestionarArtistas.Text = "Gestionar Artistas";
+            this.btnGestionarArtistas.UseVisualStyleBackColor = true;
+            this.btnGestionarArtistas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnGestionarArtistas.ForeColor = System.Drawing.Color.White;
+            this.btnGestionarArtistas.Click += new System.EventHandler(this.btnGestionarArtistas_Click);
             // 
             // FormMusica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1040, 450); // Aumentar el ancho para el nuevo botón
+            this.Controls.Add(this.btnGestionarArtistas);
+            this.Controls.Add(this.btnGestionarAlbums);
             this.Controls.Add(this.btnAgregarCancion);
             this.Controls.Add(this.dgvResultados);
             this.Controls.Add(this.btnSearchAlbums);
@@ -119,7 +162,8 @@ namespace ProjectBD
             this.Controls.Add(this.txtSearchTerm);
             this.Controls.Add(this.lblSearch);
             this.Name = "FormMusica";
-            this.Text = "Gestión de Música";
+            this.Text = "Música";
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultados)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -135,5 +179,7 @@ namespace ProjectBD
         private System.Windows.Forms.Button btnSearchAlbums;
         private System.Windows.Forms.DataGridView dgvResultados;
         private System.Windows.Forms.Button btnAgregarCancion;
+        private System.Windows.Forms.Button btnGestionarAlbums;
+        private System.Windows.Forms.Button btnGestionarArtistas;
     }
 }

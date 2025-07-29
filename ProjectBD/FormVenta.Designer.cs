@@ -53,6 +53,8 @@ namespace ProjectBD
             this.cmbProducts.Name = "cmbProducts";
             this.cmbProducts.Size = new System.Drawing.Size(300, 24);
             this.cmbProducts.TabIndex = 0;
+            this.cmbProducts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.cmbProducts.ForeColor = System.Drawing.Color.White;
             // 
             // txtQuantity
             // 
@@ -62,6 +64,8 @@ namespace ProjectBD
             this.txtQuantity.Size = new System.Drawing.Size(100, 22);
             this.txtQuantity.TabIndex = 1;
             this.txtQuantity.Text = "1";
+            this.txtQuantity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtQuantity.ForeColor = System.Drawing.Color.White;
             // 
             // btnAddProduct
             // 
@@ -72,6 +76,8 @@ namespace ProjectBD
             this.btnAddProduct.TabIndex = 2;
             this.btnAddProduct.Text = "Agregar Producto";
             this.btnAddProduct.UseVisualStyleBackColor = true;
+            this.btnAddProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnAddProduct.ForeColor = System.Drawing.Color.White;
             this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             // 
             // dataGridViewCart
@@ -92,6 +98,11 @@ namespace ProjectBD
             this.dataGridViewCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewCart.Size = new System.Drawing.Size(776, 252);
             this.dataGridViewCart.TabIndex = 3;
+            this.dataGridViewCart.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewCart.ForeColor = System.Drawing.Color.Black;
+            this.dataGridViewCart.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
+            this.dataGridViewCart.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.dataGridViewCart.EnableHeadersVisualStyles = false;
             // 
             // lblTotal
             // 
@@ -103,6 +114,7 @@ namespace ProjectBD
             this.lblTotal.Size = new System.Drawing.Size(80, 25);
             this.lblTotal.TabIndex = 4;
             this.lblTotal.Text = "Total: ";
+            this.lblTotal.ForeColor = System.Drawing.Color.White;
             // 
             // btnProcessSale
             // 
@@ -113,6 +125,8 @@ namespace ProjectBD
             this.btnProcessSale.TabIndex = 5;
             this.btnProcessSale.Text = "Procesar Venta";
             this.btnProcessSale.UseVisualStyleBackColor = true;
+            this.btnProcessSale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnProcessSale.ForeColor = System.Drawing.Color.White;
             this.btnProcessSale.Click += new System.EventHandler(this.btnProcessSale_Click);
             // 
             // btnClearSale
@@ -124,6 +138,8 @@ namespace ProjectBD
             this.btnClearSale.TabIndex = 6;
             this.btnClearSale.Text = "Nueva Venta";
             this.btnClearSale.UseVisualStyleBackColor = true;
+            this.btnClearSale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnClearSale.ForeColor = System.Drawing.Color.White;
             this.btnClearSale.Click += new System.EventHandler(this.BtnClearSale_Click);
             // 
             // label1
@@ -134,6 +150,7 @@ namespace ProjectBD
             this.label1.Size = new System.Drawing.Size(65, 16);
             this.label1.TabIndex = 7;
             this.label1.Text = "Producto:";
+            this.label1.ForeColor = System.Drawing.Color.White;
             // 
             // label2
             // 
@@ -144,6 +161,7 @@ namespace ProjectBD
             this.label2.Size = new System.Drawing.Size(64, 16);
             this.label2.TabIndex = 8;
             this.label2.Text = "Cantidad:";
+            this.label2.ForeColor = System.Drawing.Color.White;
             // 
             // btnRemoveProduct
             // 
@@ -154,6 +172,8 @@ namespace ProjectBD
             this.btnRemoveProduct.TabIndex = 9;
             this.btnRemoveProduct.Text = "Quitar Producto";
             this.btnRemoveProduct.UseVisualStyleBackColor = true;
+            this.btnRemoveProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.btnRemoveProduct.ForeColor = System.Drawing.Color.White;
             this.btnRemoveProduct.Click += new System.EventHandler(this.btnRemoveProduct_Click);
             // 
             // lblCliente
@@ -164,12 +184,15 @@ namespace ProjectBD
             this.lblCliente.Size = new System.Drawing.Size(51, 16);
             this.lblCliente.TabIndex = 10;
             this.lblCliente.Text = "Cliente:";
+            this.lblCliente.ForeColor = System.Drawing.Color.White;
             // 
             // cmbClientes
             // 
             this.cmbClientes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbClientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.cmbClientes.ForeColor = System.Drawing.Color.White;
             this.cmbClientes.FormattingEnabled = true;
             this.cmbClientes.Location = new System.Drawing.Point(12, 32);
             this.cmbClientes.Name = "cmbClientes";
@@ -194,7 +217,8 @@ namespace ProjectBD
             this.Controls.Add(this.txtQuantity);
             this.Controls.Add(this.cmbProducts);
             this.Name = "FormVenta";
-            this.Text = "Melodia Urbana - Punto de Venta";
+            this.Text = "Venta";
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
