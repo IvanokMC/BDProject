@@ -1,4 +1,4 @@
-﻿namespace ProjectBD
+namespace ProjectBD
 {
     partial class Form1
     {
@@ -28,104 +28,64 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.artistasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.productosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ivanokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.btnGestionarMusica = new System.Windows.Forms.Button();
+            this.btnGestionarVentas = new System.Windows.Forms.Button();
+            this.btnGestionarClientes = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // btnGestionarMusica
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.artistasToolStripMenuItem,
-            this.productosToolStripMenuItem,
-            this.ventasToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.btnGestionarMusica.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionarMusica.Location = new System.Drawing.Point(100, 60);
+            this.btnGestionarMusica.Name = "btnGestionarMusica";
+            this.btnGestionarMusica.Size = new System.Drawing.Size(200, 60);
+            this.btnGestionarMusica.TabIndex = 0;
+            this.btnGestionarMusica.Text = "Gestionar Música";
+            this.btnGestionarMusica.UseVisualStyleBackColor = true;
+            this.btnGestionarMusica.Click += new System.EventHandler(this.btnGestionarMusica_Click);
             // 
-            // artistasToolStripMenuItem
+            // btnGestionarVentas
             // 
-            this.artistasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ivanokToolStripMenuItem,
-            this.xdToolStripMenuItem});
-            this.artistasToolStripMenuItem.Name = "artistasToolStripMenuItem";
-            this.artistasToolStripMenuItem.Size = new System.Drawing.Size(72, 24);
-            this.artistasToolStripMenuItem.Text = "Artistas";
-            this.artistasToolStripMenuItem.Click += new System.EventHandler(this.ArtistasToolStripMenuItem_Click);
+            this.btnGestionarVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionarVentas.Location = new System.Drawing.Point(100, 140);
+            this.btnGestionarVentas.Name = "btnGestionarVentas";
+            this.btnGestionarVentas.Size = new System.Drawing.Size(200, 60);
+            this.btnGestionarVentas.TabIndex = 1;
+            this.btnGestionarVentas.Text = "Gestionar Ventas";
+            this.btnGestionarVentas.UseVisualStyleBackColor = true;
+            this.btnGestionarVentas.Click += new System.EventHandler(this.btnGestionarVentas_Click);
             // 
-            // productosToolStripMenuItem
+            // btnGestionarClientes
             // 
-            this.productosToolStripMenuItem.Name = "productosToolStripMenuItem";
-            this.productosToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
-            this.productosToolStripMenuItem.Text = "Productos";
-            // 
-            // ventasToolStripMenuItem
-            // 
-            this.ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
-            this.ventasToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
-            this.ventasToolStripMenuItem.Text = "Ventas";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 28);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(1067, 526);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // ivanokToolStripMenuItem
-            // 
-            this.ivanokToolStripMenuItem.Name = "ivanokToolStripMenuItem";
-            this.ivanokToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.ivanokToolStripMenuItem.Text = "Ivanok";
-            // 
-            // xdToolStripMenuItem
-            // 
-            this.xdToolStripMenuItem.Name = "xdToolStripMenuItem";
-            this.xdToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.xdToolStripMenuItem.Text = "xd";
+            this.btnGestionarClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionarClientes.Location = new System.Drawing.Point(100, 220);
+            this.btnGestionarClientes.Name = "btnGestionarClientes";
+            this.btnGestionarClientes.Size = new System.Drawing.Size(200, 60);
+            this.btnGestionarClientes.TabIndex = 2;
+            this.btnGestionarClientes.Text = "Gestionar Clientes";
+            this.btnGestionarClientes.UseVisualStyleBackColor = true;
+            this.btnGestionarClientes.Click += new System.EventHandler(this.btnGestionarClientes_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.ClientSize = new System.Drawing.Size(400, 350);
+            this.Controls.Add(this.btnGestionarClientes);
+            this.Controls.Add(this.btnGestionarVentas);
+            this.Controls.Add(this.btnGestionarMusica);
             this.Name = "Form1";
-            this.Text = "Melodia Urbana";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Melodia Urbana - Menú Principal";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem artistasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem productosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ToolStripMenuItem ivanokToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem xdToolStripMenuItem;
+        private System.Windows.Forms.Button btnGestionarMusica;
+        private System.Windows.Forms.Button btnGestionarVentas;
+        private System.Windows.Forms.Button btnGestionarClientes;
     }
 }
-

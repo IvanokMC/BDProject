@@ -70,18 +70,19 @@ CREATE TABLE Producto (
 );
 
 -- =========================
--- Subtipo: �lbum
+-- Subtipo: Álbum
 -- =========================
 CREATE TABLE Album (
     id_producto TId PRIMARY KEY,
     fecha_lanzamiento DATE,
     id_artista_principal TId,
+    EsAlbumCompleto BIT DEFAULT 0, -- NUEVA COLUMNA
     FOREIGN KEY (id_producto) REFERENCES Producto(id_producto),
     FOREIGN KEY (id_artista_principal) REFERENCES Artista(id_artista)
 );
 
 -- =========================
--- Subtipo: Canci�n
+-- Subtipo: Canción
 -- =========================
 CREATE TABLE Cancion (
     id_producto TId PRIMARY KEY,
@@ -115,7 +116,7 @@ CREATE TABLE Cliente (
     id_cliente INT IDENTITY(1,1) PRIMARY KEY,
     nombre TNombreCorto,
     correo_electronico TCorreo UNIQUE,
-    contrase�a TPassword, -- en app, cifrada
+    contraseña TPassword, -- en app, cifrada
     direccion TDescripcion
 );
 
@@ -140,3 +141,400 @@ CREATE TABLE DetalleVenta (
     FOREIGN KEY (id_comprobante) REFERENCES ComprobanteVenta(id_comprobante),
     FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
 );
+
+
+
+INSERT INTO Artista VALUES
+('A00001', 'Luna Vibe', 'solista', 'México', 'Pop', '2015-06-01', 'Cantante pop latinoamericana.', 'imagen1.jpg'),
+('A00002', 'Beat Clash', 'grupo', 'Estados Unidos', 'Hip-Hop', '2010-03-15', 'Grupo pionero en rap fusión.', 'imagen2.jpg'),
+('A00003', 'Estelar', 'solista', 'Perú', 'Indie', '2018-08-21', 'Compositor de baladas indie.', 'imagen3.jpg'),
+('A00004', 'Los Urbanos', 'grupo', 'Argentina', 'Reggaeton', '2012-01-10', 'Banda de reggaeton urbana.', 'imagen4.jpg'),
+('A00005', 'Nova Luz', 'solista', 'Chile', 'Electropop', '2019-11-05', 'Artista emergente de electropop.', 'imagen5.jpg');
+
+
+INSERT INTO ArtistaSolista VALUES
+('A00001', 'Lucía Martínez', '1990-04-23', 'F'),
+('A00003', 'Esteban Ruiz', '1995-10-12', 'M'),
+('A00005', 'Camila Torres', '1998-07-08', 'F');
+
+
+INSERT INTO GrupoMusical VALUES
+('A00002', '2010-03-15', NULL),
+('A00004', '2012-01-10', '2021-12-31');
+
+
+
+INSERT INTO IntegranteGrupo VALUES
+('A00002', 'A00003', 'Baterista', '2010-05-01', NULL),
+('A00002', 'A00001', 'Vocalista', '2012-09-01', '2015-01-01'),
+('A00004', 'A00005', 'Productora', '2013-01-01', NULL),
+('A00004', 'A00003', 'Corista', '2014-02-15', '2019-10-01'),
+('A00004', 'A00001', 'Coreógrafa', '2015-06-10', NULL);
+
+
+
+INSERT INTO Producto VALUES
+('P00001', 'Brilla la Luna', 9.99),
+('P00002', 'Sonidos del Barrio', 14.50),
+('P00003', 'Ritmo Estelar', 8.75),
+('P00004', 'Luz y Sombra', 11.25),
+('P00005', 'Latidos Urbanos', 13.00);
+
+
+INSERT INTO Album VALUES
+('P00001', '2016-07-01', 'A00001', 1),
+('P00002', '2011-11-20', 'A00002', 1),
+('P00004', '2020-09-10', 'A00005', 0);
+
+
+
+INSERT INTO Cancion VALUES
+('P00003', '00:03:45', 'MP3', 'Indie', 1, NULL, 'A00003'),
+('P00005', '00:04:15', 'MP3', 'Reggaeton', 0, 'P00002', 'A00004'),
+('P00001', '00:03:30', 'WAV', 'Pop', 0, 'P00001', 'A00001'),
+('P00002', '00:04:00', 'FLAC', 'Hip-Hop', 1, 'P00002', 'A00002'),
+('P00004', '00:05:05', 'MP3', 'Electropop', 1, 'P00004', 'A00005');
+
+
+
+INSERT INTO Colaboracion VALUES
+('P00005', 'A00003', 'Compositor'),
+('P00003', 'A00005', 'Productora'),
+('P00001', 'A00002', 'Beatmaker'),
+('P00002', 'A00001', 'Vocalista'),
+('P00004', 'A00004', 'Remix');
+
+
+INSERT INTO Cliente(nombre, correo_electronico, contraseña, direccion) VALUES
+('Carlos Pérez', 'carlosp@gmail.com', 'abc123', 'Av. Siempre Viva 123'),
+('Lucía Gómez', 'lucia_gz@hotmail.com', 'lucia456', 'Calle Luna 456'),
+('Andrés Muñoz', 'andres.m@gmail.com', 'muñoz789', 'Jr. Sol 789'),
+('Fernanda Torres', 'fer.t@gmail.com', '123fer456', 'Pje. Estrella 321'),
+('Mario Díaz', 'mario.d@gmail.com', 'días987', 'Av. Central 987');
+
+INSERT INTO ComprobanteVenta(id_cliente, fecha_venta) VALUES
+(1, '2025-07-01 14:35:00'),
+(2, '2025-07-05 10:20:00'),
+(3, '2025-07-15 09:10:00'),
+(4, '2025-07-20 18:45:00'),
+(5, '2025-07-29 13:00:00');
+
+
+INSERT INTO DetalleVenta VALUES
+(1, 'P00001', 9.99),
+(1, 'P00003', 8.75),
+(2, 'P00002', 14.50),
+(3, 'P00005', 13.00),
+(4, 'P00004', 11.25);
+
+
+
+-- =========================
+-- Stored Procedures
+-- =========================
+
+-- Insertar Artista (general)
+CREATE PROCEDURE InsertArtista
+    @id_artista TId,
+    @nombre_artistico TNombreCorto,
+    @tipo_artista NVARCHAR(10),
+    @pais_origen TNombreCorto,
+    @genero_principal TGenero,
+    @fecha_inicio DATE,
+    @biografia TDescripcion,
+    @imagen TDescripcion
+AS
+BEGIN
+    INSERT INTO Artista (id_artista, nombre_artistico, tipo_artista, pais_origen, genero_principal, fecha_inicio, biografia, imagen)
+    VALUES (@id_artista, @nombre_artistico, @tipo_artista, @pais_origen, @genero_principal, @fecha_inicio, @biografia, @imagen);
+END;
+GO
+
+-- Insertar Artista Solista
+CREATE PROCEDURE InsertArtistaSolista
+    @id_artista TId,
+    @nombre_artistico TNombreCorto,
+    @pais_origen TNombreCorto,
+    @genero_principal TGenero,
+    @fecha_inicio DATE,
+    @biografia TDescripcion,
+    @imagen TDescripcion,
+    @nombre_real TNombreCorto,
+    @fecha_nacimiento DATE,
+    @sexo NVARCHAR(10)
+AS
+BEGIN
+    EXEC InsertArtista @id_artista, @nombre_artistico, 'solista', @pais_origen, @genero_principal, @fecha_inicio, @biografia, @imagen;
+    INSERT INTO ArtistaSolista (id_artista, nombre_real, fecha_nacimiento, sexo)
+    VALUES (@id_artista, @nombre_real, @fecha_nacimiento, @sexo);
+END;
+GO
+
+-- Insertar Grupo Musical
+CREATE PROCEDURE InsertGrupoMusical
+    @id_artista TId,
+    @nombre_artistico TNombreCorto,
+    @pais_origen TNombreCorto,
+    @genero_principal TGenero,
+    @fecha_inicio DATE,
+    @biografia TDescripcion,
+    @imagen TDescripcion,
+    @fecha_formacion DATE,
+    @fecha_disolucion DATE = NULL
+AS
+BEGIN
+    EXEC InsertArtista @id_artista, @nombre_artistico, 'grupo', @pais_origen, @genero_principal, @fecha_inicio, @biografia, @imagen;
+    INSERT INTO GrupoMusical (id_artista, fecha_formacion, fecha_disolucion)
+    VALUES (@id_artista, @fecha_formacion, @fecha_disolucion);
+END;
+GO
+
+-- Insertar Integrante de Grupo
+CREATE PROCEDURE InsertIntegranteGrupo
+    @id_artista_grupo TId,
+    @id_artista_miembro TId,
+    @rol TNombreCorto,
+    @fecha_ingreso DATE,
+    @fecha_salida DATE = NULL
+AS
+BEGIN
+    INSERT INTO IntegranteGrupo (id_artista_grupo, id_artista_miembro, rol, fecha_ingreso, fecha_salida)
+    VALUES (@id_artista_grupo, @id_artista_miembro, @rol, @fecha_ingreso, @fecha_salida);
+END;
+GO
+
+-- Insertar Producto (general)
+CREATE PROCEDURE InsertProducto
+    @id_producto TId,
+    @titulo TNombreLargo,
+    @precio_unitario TPrecio
+AS
+BEGIN
+    INSERT INTO Producto (id_producto, titulo, precio_unitario)
+    VALUES (@id_producto, @titulo, @precio_unitario);
+END;
+GO
+
+-- Insertar Álbum
+CREATE PROCEDURE InsertAlbum
+    @id_producto TId,
+    @titulo TNombreLargo,
+    @precio_unitario TPrecio,
+    @fecha_lanzamiento DATE,
+    @id_artista_principal TId
+AS
+BEGIN
+    EXEC InsertProducto @id_producto, @titulo, @precio_unitario;
+    INSERT INTO Album (id_producto, fecha_lanzamiento, id_artista_principal)
+    VALUES (@id_producto, @fecha_lanzamiento, @id_artista_principal);
+END;
+GO
+
+-- Insertar Canción
+CREATE PROCEDURE InsertCancion
+    @id_producto TId,
+    @titulo TNombreLargo,
+    @precio_unitario TPrecio,
+    @duracion TIME,
+    @formato TFormato,
+    @genero TGenero,
+    @es_sencillo BIT,
+    @id_album TId = NULL,
+    @id_artista_principal TId
+AS
+BEGIN
+    EXEC InsertProducto @id_producto, @titulo, @precio_unitario;
+    INSERT INTO Cancion (id_producto, duracion, formato, genero, es_sencillo, id_album, id_artista_principal)
+    VALUES (@id_producto, @duracion, @formato, @genero, @es_sencillo, @id_album, @id_artista_principal);
+END;
+GO
+
+-- Insertar Colaboración
+CREATE PROCEDURE InsertColaboracion
+    @id_cancion TId,
+    @id_artista TId,
+    @rol TNombreCorto
+AS
+BEGIN
+    INSERT INTO Colaboracion (id_cancion, id_artista, rol)
+    VALUES (@id_cancion, @id_artista, @rol);
+END;
+GO
+
+-- Insertar Cliente
+CREATE PROCEDURE InsertCliente
+    @nombre TNombreCorto,
+    @correo_electronico TCorreo,
+    @contraseña TPassword,
+    @direccion TDescripcion
+AS
+BEGIN
+    INSERT INTO Cliente (nombre, correo_electronico, contraseña, direccion)
+    VALUES (@nombre, @correo_electronico, @contraseña, @direccion);
+END;
+GO
+
+-- Insertar Comprobante de Venta
+CREATE PROCEDURE InsertComprobanteVenta
+    @id_cliente INT,
+    @fecha_venta DATETIME = NULL,
+    @id_comprobante INT OUTPUT
+AS
+BEGIN
+    IF @fecha_venta IS NULL
+        SET @fecha_venta = GETDATE();
+
+    INSERT INTO ComprobanteVenta (id_cliente, fecha_venta)
+    VALUES (@id_cliente, @fecha_venta);
+
+    SET @id_comprobante = SCOPE_IDENTITY();
+END;
+GO
+
+-- Insertar Detalle de Venta
+CREATE PROCEDURE InsertDetalleVenta
+    @id_comprobante INT,
+    @id_producto TId,
+    @precio_unitario TPrecio
+AS
+BEGIN
+    INSERT INTO DetalleVenta (id_comprobante, id_producto, precio_unitario)
+    VALUES (@id_comprobante, @id_producto, @precio_unitario);
+END;
+GO
+
+-- =========================
+-- Functions
+-- =========================
+
+-- Obtener el total de ventas de un cliente
+CREATE FUNCTION GetTotalVentasCliente
+(
+    @id_cliente INT
+)
+RETURNS DECIMAL(10, 2)
+AS
+BEGIN
+    DECLARE @total_ventas DECIMAL(10, 2);
+
+    SELECT @total_ventas = SUM(dv.precio_unitario)
+    FROM ComprobanteVenta cv
+    JOIN DetalleVenta dv ON cv.id_comprobante = dv.id_comprobante
+    WHERE cv.id_cliente = @id_cliente;
+
+    RETURN ISNULL(@total_ventas, 0.00);
+END;
+GO
+
+-- =========================
+-- Stored Procedures de Selección
+-- =========================
+
+-- Obtener Artistas
+CREATE PROCEDURE GetArtistas
+    @nombre_artistico_filtro TNombreCorto = NULL
+AS
+BEGIN
+    SELECT
+        A.id_artista,
+        A.nombre_artistico,
+        A.tipo_artista,
+        A.pais_origen,
+        A.genero_principal,
+        A.fecha_inicio,
+        A.biografia,
+        A.imagen,
+        CASE WHEN ASol.id_artista IS NOT NULL THEN ASol.nombre_real ELSE NULL END AS nombre_real_solista,
+        CASE WHEN ASol.id_artista IS NOT NULL THEN ASol.fecha_nacimiento ELSE NULL END AS fecha_nacimiento_solista,
+        CASE WHEN ASol.id_artista IS NOT NULL THEN ASol.sexo ELSE NULL END AS sexo_solista,
+        CASE WHEN GMus.id_artista IS NOT NULL THEN GMus.fecha_formacion ELSE NULL END AS fecha_formacion_grupo,
+        CASE WHEN GMus.id_artista IS NOT NULL THEN GMus.fecha_disolucion ELSE NULL END AS fecha_disolucion_grupo
+    FROM Artista A
+    LEFT JOIN ArtistaSolista ASol ON A.id_artista = ASol.id_artista
+    LEFT JOIN GrupoMusical GMus ON A.id_artista = GMus.id_artista
+    WHERE (@nombre_artistico_filtro IS NULL OR A.nombre_artistico LIKE '%' + @nombre_artistico_filtro + '%');
+END;
+GO
+
+-- Obtener Canciones
+CREATE PROCEDURE GetCanciones
+    @titulo_filtro TNombreLargo = NULL,
+    @genero_filtro TGenero = NULL,
+    @artista_filtro TNombreCorto = NULL
+AS
+BEGIN
+    SELECT
+        C.id_producto AS id_cancion,
+        P_Cancion.titulo AS titulo_cancion,
+        P_Cancion.precio_unitario,
+        C.duracion,
+        C.formato,
+        C.genero,
+        C.es_sencillo,
+        C.id_album,
+        P_Album.titulo AS titulo_album,
+        Art.nombre_artistico AS artista_principal,
+        Art.id_artista AS id_artista_principal
+    FROM Cancion C
+    JOIN Producto P_Cancion ON C.id_producto = P_Cancion.id_producto
+    LEFT JOIN Album A ON C.id_album = A.id_producto
+    LEFT JOIN Producto P_Album ON A.id_producto = P_Album.id_producto
+    JOIN Artista Art ON C.id_artista_principal = Art.id_artista
+    WHERE ( @titulo_filtro IS NULL OR P_Cancion.titulo LIKE '%' + @titulo_filtro + '%')
+      AND ( @genero_filtro IS NULL OR C.genero LIKE '%' + @genero_filtro + '%')
+      AND ( @artista_filtro IS NULL OR Art.nombre_artistico LIKE '%' + @artista_filtro + '%');
+END;
+GO
+
+-- Obtener Álbumes
+CREATE PROCEDURE GetAlbums
+    @titulo_filtro TNombreLargo = NULL,
+    @artista_filtro TNombreCorto = NULL
+AS
+BEGIN
+    SELECT
+        Al.id_producto AS id_album,
+        P.titulo AS titulo_album,
+        P.precio_unitario,
+        Al.fecha_lanzamiento,
+        Art.nombre_artistico AS artista_principal,
+        Art.id_artista AS id_artista_principal,
+        Al.EsAlbumCompleto -- Incluir la nueva columna
+    FROM Album Al
+    JOIN Producto P ON Al.id_producto = P.id_producto
+    JOIN Artista Art ON Al.id_artista_principal = Art.id_artista
+    WHERE (@titulo_filtro IS NULL OR P.titulo LIKE '%' + @titulo_filtro + '%')
+      AND (@artista_filtro IS NULL OR Art.nombre_artistico LIKE '%' + @artista_filtro + '%');
+END;
+GO
+
+-- =========================
+-- Trigger para actualizar EsAlbumCompleto
+-- =========================
+CREATE TRIGGER trg_UpdateAlbumCompleto
+ON Cancion
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Obtener los IDs de álbum afectados por la operación
+    DECLARE @AffectedAlbumIds TABLE (id_album TId);
+
+    INSERT INTO @AffectedAlbumIds (id_album)
+    SELECT DISTINCT id_album FROM INSERTED WHERE id_album IS NOT NULL;
+
+    INSERT INTO @AffectedAlbumIds (id_album)
+    SELECT DISTINCT id_album FROM DELETED WHERE id_album IS NOT NULL
+    AND id_album NOT IN (SELECT id_album FROM @AffectedAlbumIds);
+
+    -- Actualizar el estado EsAlbumCompleto para los álbumes afectados
+    UPDATE A
+    SET EsAlbumCompleto = CASE
+                            WHEN (SELECT COUNT(*) FROM Cancion WHERE id_album = A.id_producto) >= 2 THEN 1
+                            ELSE 0
+                          END
+    FROM Album A
+    JOIN @AffectedAlbumIds aff ON A.id_producto = aff.id_album;
+END;
+GO
